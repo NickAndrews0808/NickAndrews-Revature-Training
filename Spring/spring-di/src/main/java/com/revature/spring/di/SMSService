@@ -1,0 +1,7 @@
+package com.revature.spring.di;
+
+public interface SMSService {    
+    public String getMessage() {
+        return "SMS Message";
+    }
+}
