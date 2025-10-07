@@ -18,4 +18,12 @@ public class MessageService {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public void customInitMethod() {
+        System.out.println("Custom init method called");
+    }
+
+    public void customDestroyMethod() {
+        System.out.println("Custom destroy method called");
+    }
 }

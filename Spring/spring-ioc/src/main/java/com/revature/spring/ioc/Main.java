@@ -14,5 +14,8 @@ public class Main {
 
         myMsg = (MessageService)context.getBean("messageSetter");
         myMsg.printMessage();
+        
+        // Close the context to trigger destroy methods
+        ((ClassPathXmlApplicationContext) context).close();
     }
 } 
