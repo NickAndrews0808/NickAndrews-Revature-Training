@@ -1,7 +1,6 @@
 package com.revature.spring.di;
 
-public class MessageService {
-    public String getMessage() {
-        return "This is a message from MessageService.";
-    }
+public interface MessageService {
+    public void printMessage();
+    public void setMessage(String message);
 }

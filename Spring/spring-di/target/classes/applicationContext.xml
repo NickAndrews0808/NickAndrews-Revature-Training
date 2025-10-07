@@ -6,10 +6,14 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- Example bean definition -->
-    <bean id="emailService" class="com.revature.spring.di.EmailService">
-     
+    <bean id="emailService" class="com.revature.spring.di.EmailService" />
+
     <bean id="notificationService" class="com.revature.spring.di.NotificationService">
         <constructor-arg ref="emailService"/>
+    </bean>
+
+    <bean id="smsService" class="com.revature.spring.di.SMSService">
+        <property name="message" value="This is a setter injection message!"/>
     </bean>
 
 </beans>
