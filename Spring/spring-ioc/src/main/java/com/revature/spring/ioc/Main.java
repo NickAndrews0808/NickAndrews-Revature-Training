@@ -8,9 +8,11 @@ public class Main {
         // Load the Spring configuration file
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         // Retrieve the bean from the Spring container
-        MessageService myMsg = (MessageService)context.getBean("messageService", MessageService.class);
+        MessageService myMsg = (MessageService)context.getBean("messageService");
         // Call a method on the bean
         myMsg.printMessage();
 
+        myMsg = (MessageService)context.getBean("messageSetter");
+        myMsg.printMessage();
     }
-}
+} 

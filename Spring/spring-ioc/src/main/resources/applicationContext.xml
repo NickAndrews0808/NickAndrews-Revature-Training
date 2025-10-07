@@ -5,7 +5,11 @@
             http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="messageService" class="com.revature.spring.ioc.MessageService">
-        <constructor-arg value="Hello from Spring Config!" />
+        <constructor-arg value="Hello from constructor injection!" />
+    </bean>
+
+    <bean id="messageSetter" class="com.revature.spring.ioc.MessageService">
+        <property name="message" value="Hello from setter injection!" />
     </bean>
 
 </beans>

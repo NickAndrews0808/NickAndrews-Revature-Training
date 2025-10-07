@@ -3,6 +3,10 @@ package com.revature.spring.ioc;
 public class MessageService {
     private String message;
 
+    public MessageService() {
+        this.message = "Default Constructor Message";
+    }
+
     public MessageService(String message) {
         this.message = message;
     }
