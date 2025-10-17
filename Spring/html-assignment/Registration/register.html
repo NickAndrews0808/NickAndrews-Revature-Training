@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Registration</title>
+  <link rel="stylesheet" href="register.css" />
+  <style>
+    .info-display {
+      display: none;
+      background: #f8f9fa;
+      padding: 25px;
+      border-radius: 10px;
+      margin-top: 30px;
+      border-left: 4px solid #5563DE;
+    }
+    
+    .info-item {
+      margin-bottom: 12px;
+      font-size: 1.05em;
+    }
+    
+    .info-item strong {
+      color: #5563DE;
+    }
+    
+    .registration-form {
+      transition: all 0.3s ease;
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    .success-message {
+      text-align: center;
+      color: #28a745;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Student Registration Form</h1>
+    
+    <div class="registration-form" id="registrationFormContainer">
+      <form id="registrationForm">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="fullName" placeholder="Enter your full name" required />
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="Enter your email" required />
+        </div>
+
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="phone" placeholder="Enter your phone number" required />
+        </div>
+
+        <div class="form-group">
+          <label>Date of Birth</label>
+          <input type="date" id="dob" required />
+        </div>
+
+        <div class="form-group">
+          <label>Gender</label>
+          <select id="gender" required>
+            <option value="">Select gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Course</label>
+          <select id="course" required>
+            <option value="">Select a course</option>
+            <option>Computer Science</option>
+            <option>Information Technology</option>
+            <option>Data Science</option>
+            <option>Business Administration</option>
+            <option>Graphic Design</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Address</label>
+          <textarea id="address" rows="3" placeholder="Enter your address" required></textarea>
+        </div>
+
+        <button type="submit" class="btn">Register</button>
+      </form>
+    </div>
+    
+    <div class="info-display" id="infoDisplay">
+      <div class="success-message">Registration Successful!</div>
+      <div id="studentInfo"></div>
+      <button class="btn" onclick="resetForm()">Register Another Student</button>
+    </div>
+  </div>
+
+  <script>
+    // Check if there's existing data on page load
+    window.onload = function() {
+      const existingData = localStorage.getItem("studentData");
+      if (existingData) {
+        displayStudentInfo(JSON.parse(existingData));
+      }
+    };
+
+    document.getElementById("registrationForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      // Gather form data
+      const userData = {
+        fullName: document.getElementById("fullName").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        dob: document.getElementById("dob").value,
+        gender: document.getElementById("gender").value,
+        course: document.getElementById("course").value,
+        address: document.getElementById("address").value.trim()
+      };
+
+      // Store in localStorage
+      localStorage.setItem("studentData", JSON.stringify(userData));
+
+      // Display the information on the same page
+      displayStudentInfo(userData);
+    });
+
+    function displayStudentInfo(data) {
+      // Hide the form
+      document.getElementById("registrationFormContainer").classList.add("hidden");
+      
+      // Show the info display
+      document.getElementById("infoDisplay").style.display = "block";
+      
+      // Populate the student info
+      document.getElementById("studentInfo").innerHTML = `
+        <div class="info-item"><strong>Full Name:</strong> ${data.fullName}</div>
+        <div class="info-item"><strong>Email:</strong> ${data.email}</div>
+        <div class="info-item"><strong>Phone:</strong> ${data.phone}</div>
+        <div class="info-item"><strong>Date of Birth:</strong> ${data.dob}</div>
+        <div class="info-item"><strong>Gender:</strong> ${data.gender}</div>
+        <div class="info-item"><strong>Course:</strong> ${data.course}</div>
+        <div class="info-item"><strong>Address:</strong> ${data.address}</div>
+      `;
+    }
+
+    function resetForm() {
+      // Clear localStorage
+      localStorage.removeItem("studentData");
+      
+      // Reset the form
+      document.getElementById("registrationForm").reset();
+      
+      // Show the form and hide the info display
+      document.getElementById("registrationFormContainer").classList.remove("hidden");
+      document.getElementById("infoDisplay").style.display = "none";
+    }
+  </script>
+</body>
+</html>

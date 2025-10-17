@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Information</title>
+  <link rel="stylesheet" href="register.css" />
+  <style>
+    body {
+      background-color: #fff;
+    }
+
+    .info-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 600px;
+      margin: 40px auto;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .info-container h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #222;
+    }
+
+    .info-item {
+      margin-bottom: 15px;
+      font-size: 1.05em;
+    }
+
+    .info-item strong {
+      color: #5563DE;
+    }
+
+    .btn {
+      margin-top: 25px;
+    }
+  </style>
+</head>
+<body>
+  <div class="info-container">
+    <h2>Student Information</h2>
+    <div id="infoDisplay"></div>
+    <button class="btn" onclick="window.location.href='register.html'">Back to Registration</button>
+  </div>
+
+  <script>
+    window.onload = function() {
+      const data = JSON.parse(localStorage.getItem("studentData"));
+
+      if (data && data.fullName) {
+        document.getElementById("infoDisplay").innerHTML = `
+          <div class="info-item"><strong>Full Name:</strong> ${data.fullName}</div>
+          <div class="info-item"><strong>Email:</strong> ${data.email}</div>
+          <div class="info-item"><strong>Phone:</strong> ${data.phone}</div>
+          <div class="info-item"><strong>Date of Birth:</strong> ${data.dob}</div>
+          <div class="info-item"><strong>Gender:</strong> ${data.gender}</div>
+          <div class="info-item"><strong>Course:</strong> ${data.course}</div>
+          <div class="info-item"><strong>Address:</strong> ${data.address}</div>
+        `;
+      } else {
+        document.getElementById("infoDisplay").innerHTML = `
+          <p style="color:red;">No data found. Please register again.</p>
+        `;
+      }
+    };
+  </script>
+</body>
+</html>
